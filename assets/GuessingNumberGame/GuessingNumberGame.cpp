@@ -1,4 +1,5 @@
 #include <iostream>
+#include <random>
 
 int main()
 {
@@ -24,7 +25,7 @@ int main()
         if (userNumber == randomNum)
         {
             std::cout << "Score\n" << score + 100;
-            std::cout << "You win the round\n"
+            std::cout << "You win the round\n";
         }
     }
     std::cout << "YOU WIN THE GAME";
