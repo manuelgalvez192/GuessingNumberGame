@@ -52,7 +52,7 @@ void main(array<String^>^ args)
     Application::EnableVisualStyles();
     Application::SetCompatibleTextRenderingDefault(false);
     GuessingNumberGame::MyForm form;
-    Application::Run(%form);
+    Application::Run(% form);
 
     //return (0);
-}
+};
