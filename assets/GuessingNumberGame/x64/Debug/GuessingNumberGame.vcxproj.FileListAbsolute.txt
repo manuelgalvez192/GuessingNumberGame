@@ -1,0 +1,3 @@
+C:\Users\Vix\source\repos\GuessingNumberGame\assets\GuessingNumberGame\x64\Debug\GuessingNumberGame.vcxproj.AssemblyReference.cache
+C:\Users\Vix\source\repos\GuessingNumberGame\assets\GuessingNumberGame\x64\Debug\GuessingNumberGame.MyForm.resources
+C:\Users\Vix\source\repos\GuessingNumberGame\assets\GuessingNumberGame\x64\Debug\GuessingNumberGame.vcxproj.GenerateResource.cache
