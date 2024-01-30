@@ -30,7 +30,7 @@ namespace GuessingNumberGame {
 			{
 				InitializeComponent();
 				randomNum = 0;
-				lives = 3;
+				lives = 5;
 				score = 0;
 				userNumber = 0;
 			}
@@ -181,6 +181,10 @@ namespace GuessingNumberGame {
 			button2->Visible = true;
 			label2->Visible = true;
 			label3->Visible = true;
+			textBox1->Text = "";
+			label1->Text = "Welcome to the Guessing Number Game";
+			label2->Text = "";
+			lives = 5;
 			generateRandomNumber();
 		}
 	private: System::Void button2_Click(System::Object^ sender, System::EventArgs^ e)
@@ -203,8 +207,11 @@ namespace GuessingNumberGame {
 			{
 				this->label1->Text = "You win the round\n";
 				score += 100;
-				this->label2->Text = "Your score is " + score + "\n";
-				lives += 3;
+				this->label3->Text = "Score: " + score;
+				this->textBox1->Text = "";
+				this->label2->Text = "Another number has been generated";
+				lives += 1;
+				generateRandomNumber();
 			}
 			if (userNumber != randomNum && lives == 0) {
 				this->label1->Text = "GAME OVER\n";
@@ -213,7 +220,7 @@ namespace GuessingNumberGame {
 				this->label2->Visible = false;
 				this->label3->Visible = false;
 				this->textBox1->Visible = false;
-				this->button2->Visible = true;
+				this->button2->Visible = false;
 			}
 			if (score >= 1000) {
 				this->label1->Text = "Congratulations!\n";
