@@ -173,7 +173,51 @@ namespace GuessingNumberGame {
 
 			}
 	#pragma endregion
-		private: System::Void button1_click(System::Object^ sender, System::EventArgs^ e) {
+		private: System::Void button1_click(System::Object^ sender, System::EventArgs^ e)
+		{
+			startGame();
+		}
+		private: System::Void button2_Click(System::Object^ sender, System::EventArgs^ e)
+		{
+			if (!int::TryParse(textBox1->Text, userNumber)) {
+				this->label2->Text = "It must be a number";
+				return;
+			}
+			else
+			{
+				if (userNumber < randomNum) {
+					this->label2->Text = "The magic number is greater\n";
+					lives--;
+				}
+				else if (userNumber > randomNum) {
+					this->label2->Text = "The magic number is less\n";
+					lives--;
+				}
+				if (userNumber == randomNum)
+				{
+					this->label1->Text = "You win the round\n";
+					score += 100;
+					this->label3->Text = "Score: " + score;
+					this->textBox1->Text = "";
+					this->label2->Text = "Another number has been generated";
+					lives += 5;
+					generateRandomNumber();
+				}
+				if (userNumber != randomNum && lives == 0) {
+					this->label1->Text = "GAME OVER\n";
+					this->label2->Text = "The magic number is " + randomNum + "\n";
+					hideObjects();
+				}
+				if (score >= 1000) {
+					this->label1->Text = "Congratulations!\n";
+					this->label2->Text = "You have won the game!\n";
+					hideObjects();
+				}
+			}
+		}
+
+		private: void startGame()
+		{
 			label1->Location.X = 100;
 			label1->Location.Y = 50;
 			button1->Visible = false;
@@ -185,49 +229,20 @@ namespace GuessingNumberGame {
 			label1->Text = "Welcome to the Guessing Number Game";
 			label2->Text = "";
 			lives = 5;
+			score = 0;
+			this->label3->Text = "Score: " + score;
 			generateRandomNumber();
 		}
-	private: System::Void button2_Click(System::Object^ sender, System::EventArgs^ e)
-	{
-		if (!int::TryParse(textBox1->Text, userNumber)) {
-			this->label2->Text = "It must be a number";
-			return;
-		}
-		else
+
+		private: void hideObjects()
 		{
-			if (userNumber < randomNum) {
-				this->label2->Text = "The magic number is greater\n";
-				lives--;
-			}
-			else if (userNumber > randomNum) {
-				this->label2->Text = "The magic number is less\n";
-				lives--;
-			}
-			if (userNumber == randomNum)
-			{
-				this->label1->Text = "You win the round\n";
-				score += 100;
-				this->label3->Text = "Score: " + score;
-				this->textBox1->Text = "";
-				this->label2->Text = "Another number has been generated";
-				lives += 1;
-				generateRandomNumber();
-			}
-			if (userNumber != randomNum && lives == 0) {
-				this->label1->Text = "GAME OVER\n";
-				this->label2->Text = "The magic number is " + randomNum + "\n";
-				this->button1->Visible = true;
-				this->label2->Visible = false;
-				this->label3->Visible = false;
-				this->textBox1->Visible = false;
-				this->button2->Visible = false;
-			}
-			if (score >= 1000) {
-				this->label1->Text = "Congratulations!\n";
-				this->label2->Text = "You have won the game!\n";
-			}
+			this->button1->Visible = true;
+			this->label2->Visible = false;
+			this->label3->Visible = false;
+			this->textBox1->Visible = false;
+			this->button2->Visible = false;
+			score = 100;
 		}
-	}
 
 		private: void generateRandomNumber() {
 			srand(time(NULL));
