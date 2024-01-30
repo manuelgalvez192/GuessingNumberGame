@@ -21,6 +21,8 @@ namespace GuessingNumberGame {
 	{
 		int randomNum, lives, score, userNumber;
 	private: System::Windows::Forms::Label^ label3;
+
+
 	private: System::Windows::Forms::Label^ label2;
 
 		public:
@@ -135,7 +137,7 @@ namespace GuessingNumberGame {
 					static_cast<System::Byte>(0)));
 				this->label2->Location = System::Drawing::Point(58, 74);
 				this->label2->Name = L"label2";
-				this->label2->Size = System::Drawing::Size(0, 31);
+				this->label2->Size = System::Drawing::Size(0, 26);
 				this->label2->TabIndex = 5;
 				this->label2->Visible = false;
 				// 
@@ -181,40 +183,44 @@ namespace GuessingNumberGame {
 			label3->Visible = true;
 			generateRandomNumber();
 		}
-		private: System::Void button2_Click(System::Object^ sender, System::EventArgs^ e)
+	private: System::Void button2_Click(System::Object^ sender, System::EventArgs^ e)
+	{
+		if (!int::TryParse(textBox1->Text, userNumber)) {
+			this->label2->Text = "It must be a number";
+			return;
+		}
+		else
 		{
-			if (!int::TryParse(textBox1->Text, userNumber)) {
-				this->label2->Text = "It must be a number";
-				return;
+			if (userNumber < randomNum) {
+				this->label2->Text = "The magic number is greater\n";
+				lives--;
 			}
-			else
+			else if (userNumber > randomNum) {
+				this->label2->Text = "The magic number is less\n";
+				lives--;
+			}
+			if (userNumber == randomNum)
 			{
-				if (userNumber < randomNum) {
-					this->label2->Text = "The magic number is greater\n";
-					lives--;
-				}
-				else if (userNumber > randomNum) {
-					this->label2->Text = "The magic number is less\n";
-					lives--;
-				}
-				if (userNumber == randomNum)
-				{
-					this->label1->Text = "You win the round\n";
-					score += 100;
-					this->label2->Text = "Your score is " + score + "\n";
-					lives += 3;
-				}
-				if (userNumber != randomNum && lives == 0) {
-					this->label1->Text = "GAME OVER\n";
-					this->label2->Text = "The magic number is " + randomNum + "\n";
-					score = 0;
-				}
-				if (score >= 1000) {
-					this->label1->Text = "Congratulations!\n";
-					this->label2->Text = "You have won the game!\n";
-				}
+				this->label1->Text = "You win the round\n";
+				score += 100;
+				this->label2->Text = "Your score is " + score + "\n";
+				lives += 3;
+			}
+			if (userNumber != randomNum && lives == 0) {
+				this->label1->Text = "GAME OVER\n";
+				this->label2->Text = "The magic number is " + randomNum + "\n";
+				this->button1->Visible = true;
+				this->label2->Visible = false;
+				this->label3->Visible = false;
+				this->textBox1->Visible = false;
+				this->button2->Visible = true;
+			}
+			if (score >= 1000) {
+				this->label1->Text = "Congratulations!\n";
+				this->label2->Text = "You have won the game!\n";
 			}
 		}
+	}
 
 		private: void generateRandomNumber() {
 			srand(time(NULL));
