@@ -22,6 +22,8 @@ namespace GuessingNumberGame {
 		int randomNum, lives, score, userNumber;
 	private: System::Windows::Forms::Label^ label3;
 
+	private: System::Windows::Forms::Label^ label4;
+
 
 	private: System::Windows::Forms::Label^ label2;
 
@@ -73,6 +75,7 @@ namespace GuessingNumberGame {
 				this->textBox1 = (gcnew System::Windows::Forms::TextBox());
 				this->label2 = (gcnew System::Windows::Forms::Label());
 				this->label3 = (gcnew System::Windows::Forms::Label());
+				this->label4 = (gcnew System::Windows::Forms::Label());
 				this->SuspendLayout();
 				// 
 				// label1
@@ -88,7 +91,7 @@ namespace GuessingNumberGame {
 				this->label1->ForeColor = System::Drawing::SystemColors::ControlText;
 				this->label1->Location = System::Drawing::Point(58, 33);
 				this->label1->Name = L"label1";
-				this->label1->Size = System::Drawing::Size(540, 41);
+				this->label1->Size = System::Drawing::Size(535, 39);
 				this->label1->TabIndex = 0;
 				this->label1->Text = L"Welcome to the Guessing Number Game";
 				this->label1->TextAlign = System::Drawing::ContentAlignment::TopCenter;
@@ -146,19 +149,33 @@ namespace GuessingNumberGame {
 				this->label3->AutoSize = true;
 				this->label3->Font = (gcnew System::Drawing::Font(L"Palatino Linotype", 14.25F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 					static_cast<System::Byte>(0)));
-				this->label3->Location = System::Drawing::Point(29, 313);
+				this->label3->Location = System::Drawing::Point(53, 309);
 				this->label3->Name = L"label3";
 				this->label3->Size = System::Drawing::Size(76, 26);
 				this->label3->TabIndex = 6;
 				this->label3->Text = L"Score: 0";
 				this->label3->Visible = false;
 				// 
+				// label4
+				// 
+				this->label4->AutoSize = true;
+				this->label4->Font = (gcnew System::Drawing::Font(L"Palatino Linotype", 14.25F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+					static_cast<System::Byte>(0)));
+				this->label4->Location = System::Drawing::Point(522, 309);
+				this->label4->Name = L"label4";
+				this->label4->Size = System::Drawing::Size(67, 26);
+				this->label4->TabIndex = 9;
+				this->label4->Text = L"Lives: ";
+				this->label4->TextAlign = System::Drawing::ContentAlignment::BottomRight;
+				this->label4->Visible = false;
+				// 
 				// MyForm
 				// 
 				this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 				this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 				this->BackgroundImage = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"$this.BackgroundImage")));
-				this->ClientSize = System::Drawing::Size(633, 362);
+				this->ClientSize = System::Drawing::Size(628, 360);
+				this->Controls->Add(this->label4);
 				this->Controls->Add(this->label3);
 				this->Controls->Add(this->label2);
 				this->Controls->Add(this->textBox1);
@@ -188,10 +205,12 @@ namespace GuessingNumberGame {
 				if (userNumber < randomNum) {
 					this->label2->Text = "The magic number is greater\n";
 					lives--;
+					this->label4->Text = "Lives: " + lives;
 				}
 				else if (userNumber > randomNum) {
 					this->label2->Text = "The magic number is less\n";
 					lives--;
+					this->label4->Text = "Lives: " + lives;
 				}
 				if (userNumber == randomNum)
 				{
@@ -200,7 +219,8 @@ namespace GuessingNumberGame {
 					this->label3->Text = "Score: " + score;
 					this->textBox1->Text = "";
 					this->label2->Text = "Another number has been generated";
-					lives += 5;
+					lives += 1;
+					this->label4->Text = "Lives: " + lives;
 					generateRandomNumber();
 				}
 				if (userNumber != randomNum && lives == 0) {
@@ -225,12 +245,14 @@ namespace GuessingNumberGame {
 			button2->Visible = true;
 			label2->Visible = true;
 			label3->Visible = true;
+			label4->Visible = true;
 			textBox1->Text = "";
 			label1->Text = "Welcome to the Guessing Number Game";
 			label2->Text = "";
 			lives = 5;
 			score = 0;
 			this->label3->Text = "Score: " + score;
+			this->label4->Text = "Lives: " + lives;
 			generateRandomNumber();
 		}
 
@@ -241,6 +263,7 @@ namespace GuessingNumberGame {
 			this->label3->Visible = false;
 			this->textBox1->Visible = false;
 			this->button2->Visible = false;
+			this->label4->Visible = false;
 			score = 100;
 		}
 
@@ -248,5 +271,5 @@ namespace GuessingNumberGame {
 			srand(time(NULL));
 			randomNum = rand() % 101;
 		}
-	};
+};
 };
