@@ -3,6 +3,7 @@
 #include <ctime>
 #include <iostream>
 #include <msclr\marshal_cppstd.h>
+#include <string>
 
 namespace GuessingNumberGame {
 
@@ -182,14 +183,12 @@ namespace GuessingNumberGame {
 		}
 		private: System::Void button2_Click(System::Object^ sender, System::EventArgs^ e)
 		{
-			this->label1->Text = "You have " + lives + " lives\n";
-			this->label3->Text = "Score: " + score + " \n";
-
-
-			if (int::TryParse(msclr::interop::marshal_as<std::string>(this->textBox1->Text, userNumber)) {
-				// Conversion successful, userNumber now contains the integer value
-				// Do something with the number
-
+			if (!int::TryParse(textBox1->Text, userNumber)) {
+				this->label2->Text = "It must be a number";
+				return;
+			}
+			else
+			{
 				if (userNumber < randomNum) {
 					this->label2->Text = "The magic number is greater\n";
 					lives--;
@@ -214,25 +213,12 @@ namespace GuessingNumberGame {
 					this->label1->Text = "Congratulations!\n";
 					this->label2->Text = "You have won the game!\n";
 				}
-			} else {
-				// Conversion failed, input is not a number
-				this->label2->Text = "It must be a number";
 			}
 		}
 
 		private: void generateRandomNumber() {
 			srand(time(NULL));
 			randomNum = rand() % 101;
-		}
-
-	private: void gameLoop() {
-		while (score < 1000) {
-			generateRandomNumber();
-			score += 100;
-		}
-		while (userNumber != randomNum && lives > 0) {
-
-		}
 		}
 	};
 };
