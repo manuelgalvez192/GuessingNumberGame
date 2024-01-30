@@ -2,6 +2,7 @@
 #include <cstdlib>
 #include <ctime>
 #include <iostream>
+#include <msclr\marshal_cppstd.h>
 
 namespace GuessingNumberGame {
 
@@ -18,6 +19,8 @@ namespace GuessingNumberGame {
 	public ref class MyForm : public System::Windows::Forms::Form
 	{
 		int randomNum, lives, score, userNumber;
+	private: System::Windows::Forms::Label^ label3;
+	private: System::Windows::Forms::Label^ label2;
 
 		public:
 			MyForm(void)
@@ -65,6 +68,8 @@ namespace GuessingNumberGame {
 				this->button1 = (gcnew System::Windows::Forms::Button());
 				this->button2 = (gcnew System::Windows::Forms::Button());
 				this->textBox1 = (gcnew System::Windows::Forms::TextBox());
+				this->label2 = (gcnew System::Windows::Forms::Label());
+				this->label3 = (gcnew System::Windows::Forms::Label());
 				this->SuspendLayout();
 				// 
 				// label1
@@ -72,13 +77,15 @@ namespace GuessingNumberGame {
 				this->label1->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Bottom)
 					| System::Windows::Forms::AnchorStyles::Left)
 					| System::Windows::Forms::AnchorStyles::Right));
-				this->label1->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
-				this->label1->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 20.25F, static_cast<System::Drawing::FontStyle>((System::Drawing::FontStyle::Bold | System::Drawing::FontStyle::Italic)),
+				this->label1->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(224)), static_cast<System::Int32>(static_cast<System::Byte>(224)),
+					static_cast<System::Int32>(static_cast<System::Byte>(224)));
+				this->label1->BorderStyle = System::Windows::Forms::BorderStyle::FixedSingle;
+				this->label1->Font = (gcnew System::Drawing::Font(L"Poor Richard", 20.25F, static_cast<System::Drawing::FontStyle>((System::Drawing::FontStyle::Bold | System::Drawing::FontStyle::Italic)),
 					System::Drawing::GraphicsUnit::Point, static_cast<System::Byte>(0)));
 				this->label1->ForeColor = System::Drawing::SystemColors::ControlText;
 				this->label1->Location = System::Drawing::Point(58, 33);
 				this->label1->Name = L"label1";
-				this->label1->Size = System::Drawing::Size(541, 31);
+				this->label1->Size = System::Drawing::Size(540, 41);
 				this->label1->TabIndex = 0;
 				this->label1->Text = L"Welcome to the Guessing Number Game";
 				this->label1->TextAlign = System::Drawing::ContentAlignment::TopCenter;
@@ -86,7 +93,7 @@ namespace GuessingNumberGame {
 				// button1
 				// 
 				this->button1->BackColor = System::Drawing::SystemColors::GradientInactiveCaption;
-				this->button1->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 11.25F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+				this->button1->Font = (gcnew System::Drawing::Font(L"Palatino Linotype", 14.25F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 					static_cast<System::Byte>(0)));
 				this->button1->ForeColor = System::Drawing::SystemColors::ControlText;
 				this->button1->Location = System::Drawing::Point(203, 106);
@@ -99,6 +106,8 @@ namespace GuessingNumberGame {
 				// 
 				// button2
 				// 
+				this->button2->Font = (gcnew System::Drawing::Font(L"Palatino Linotype", 9.75F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+					static_cast<System::Byte>(0)));
 				this->button2->Location = System::Drawing::Point(239, 258);
 				this->button2->Name = L"button2";
 				this->button2->Size = System::Drawing::Size(138, 42);
@@ -110,22 +119,50 @@ namespace GuessingNumberGame {
 				// 
 				// textBox1
 				// 
+				this->textBox1->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 14.25F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+					static_cast<System::Byte>(0)));
 				this->textBox1->Location = System::Drawing::Point(253, 198);
 				this->textBox1->Name = L"textBox1";
-				this->textBox1->Size = System::Drawing::Size(100, 20);
+				this->textBox1->Size = System::Drawing::Size(100, 29);
 				this->textBox1->TabIndex = 4;
 				this->textBox1->Visible = false;
+				// 
+				// label2
+				// 
+				this->label2->AutoSize = true;
+				this->label2->Font = (gcnew System::Drawing::Font(L"Palatino Linotype", 14.25F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+					static_cast<System::Byte>(0)));
+				this->label2->Location = System::Drawing::Point(58, 74);
+				this->label2->Name = L"label2";
+				this->label2->Size = System::Drawing::Size(0, 31);
+				this->label2->TabIndex = 5;
+				this->label2->Visible = false;
+				// 
+				// label3
+				// 
+				this->label3->AutoSize = true;
+				this->label3->Font = (gcnew System::Drawing::Font(L"Palatino Linotype", 14.25F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+					static_cast<System::Byte>(0)));
+				this->label3->Location = System::Drawing::Point(29, 313);
+				this->label3->Name = L"label3";
+				this->label3->Size = System::Drawing::Size(76, 26);
+				this->label3->TabIndex = 6;
+				this->label3->Text = L"Score: 0";
+				this->label3->Visible = false;
 				// 
 				// MyForm
 				// 
 				this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 				this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 				this->BackgroundImage = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"$this.BackgroundImage")));
-				this->ClientSize = System::Drawing::Size(634, 352);
+				this->ClientSize = System::Drawing::Size(633, 362);
+				this->Controls->Add(this->label3);
+				this->Controls->Add(this->label2);
 				this->Controls->Add(this->textBox1);
 				this->Controls->Add(this->button2);
 				this->Controls->Add(this->button1);
 				this->Controls->Add(this->label1);
+				this->FormBorderStyle = System::Windows::Forms::FormBorderStyle::FixedSingle;
 				this->Name = L"MyForm";
 				this->Text = L"MyForm";
 				this->ResumeLayout(false);
@@ -134,38 +171,52 @@ namespace GuessingNumberGame {
 			}
 	#pragma endregion
 		private: System::Void button1_click(System::Object^ sender, System::EventArgs^ e) {
-			label1->Text = "Guess the number";
 			label1->Location.X = 100;
 			label1->Location.Y = 50;
 			button1->Visible = false;
 			textBox1->Visible = true;
 			button2->Visible = true;
+			label2->Visible = true;
+			label3->Visible = true;
 			generateRandomNumber();
 		}
 		private: System::Void button2_Click(System::Object^ sender, System::EventArgs^ e)
 		{
-			userNumber = System::Int32::Parse(textBox1->Text);
+			this->label1->Text = "You have " + lives + " lives\n";
+			this->label3->Text = "Score: " + score + " \n";
 
-			if (userNumber < randomNum) {
-				this->label1->Text = "The magic number is greater than the number you are trying to guess\n";
-			}
-			else if (userNumber > randomNum) {
-				this->label1->Text = "The magic number is less than the number you are trying to guess\n";
-			}
-			if (userNumber == randomNum) 
-			{
-				this->label1->Text = "You win the round\n";
-				score += 100;
-				this->label1->Text = "Your score is " + score + "\n";
-				lives += 3;
-			}
-			if (userNumber != randomNum && lives == 0) {
-				this->label1->Text = "GAME OVER\n";
-				this->label1->Text = "The magic number is " + randomNum + "\n";
-				score = 0;
-			}
-			if (score >= 1000) {
-				this->label1->Text = "YOU WIN THE GAME\n";
+
+			if (int::TryParse(msclr::interop::marshal_as<std::string>(this->textBox1->Text, userNumber)) {
+				// Conversion successful, userNumber now contains the integer value
+				// Do something with the number
+
+				if (userNumber < randomNum) {
+					this->label2->Text = "The magic number is greater\n";
+					lives--;
+				}
+				else if (userNumber > randomNum) {
+					this->label2->Text = "The magic number is less\n";
+					lives--;
+				}
+				if (userNumber == randomNum)
+				{
+					this->label1->Text = "You win the round\n";
+					score += 100;
+					this->label2->Text = "Your score is " + score + "\n";
+					lives += 3;
+				}
+				if (userNumber != randomNum && lives == 0) {
+					this->label1->Text = "GAME OVER\n";
+					this->label2->Text = "The magic number is " + randomNum + "\n";
+					score = 0;
+				}
+				if (score >= 1000) {
+					this->label1->Text = "Congratulations!\n";
+					this->label2->Text = "You have won the game!\n";
+				}
+			} else {
+				// Conversion failed, input is not a number
+				this->label2->Text = "It must be a number";
 			}
 		}
 
@@ -175,12 +226,9 @@ namespace GuessingNumberGame {
 		}
 
 	private: void gameLoop() {
-		this->label1->Text = "The Game Starts\n";
 		while (score < 1000) {
 			generateRandomNumber();
-			lives = 5;
 			score += 100;
-			this->label1->Text = "You have " + lives + " lives\n";
 		}
 		while (userNumber != randomNum && lives > 0) {
 
